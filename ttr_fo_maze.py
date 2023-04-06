@@ -6,6 +6,7 @@
 # This Program is the mega movers maze test Scene
 
 from direct.showbase.ShowBase import ShowBase
+from panda3d.core import loadPrcFile
 from panda3d.core import NodePath, TextNode
 from panda3d.core import PointLight, AmbientLight
 from direct.gui.OnscreenText import OnscreenText
@@ -26,6 +27,8 @@ base = ShowBase()
 
 class Maze(DirectObject):
     def __init__(self):
+        loadPrcFile("configrc.prc")
+
         # Our standard title and instructions text
         self.title = OnscreenText(text="Panda3D: TTR Mega Movers Maze",
                                   parent=base.a2dBottomCenter,
