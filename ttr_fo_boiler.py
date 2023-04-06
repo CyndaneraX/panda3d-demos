@@ -28,7 +28,7 @@ base = ShowBase()
 
 class Boiler(DirectObject):
     def __init__(self):
-        loadPrcFile('config.prc')
+        loadPrcFile("configrc.prc")
 
         # Our standard title and instructions text
         self.title = OnscreenText(text="Panda3D: TTR Boiler",
