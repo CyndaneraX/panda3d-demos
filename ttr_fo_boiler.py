@@ -1,11 +1,13 @@
 #!/usr/bin/env python
 
 # Author: Garrett S.(System)
-# Last Updated: 2023-04-05
+# Last Updated: 2023-04-06
+# Version: 3.00
 #
 # This Program is the boiler test Scene
 
 from direct.showbase.ShowBase import ShowBase
+from panda3d.core import loadPrcFile
 from panda3d.core import NodePath, TextNode
 from panda3d.core import PointLight, AmbientLight
 from direct.gui.OnscreenText import OnscreenText
@@ -26,6 +28,8 @@ base = ShowBase()
 
 class Boiler(DirectObject):
     def __init__(self):
+        loadPrcFile('config.prc')
+
         # Our standard title and instructions text
         self.title = OnscreenText(text="Panda3D: TTR Boiler",
                                   parent=base.a2dBottomCenter,
