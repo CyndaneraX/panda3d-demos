@@ -21,14 +21,14 @@ from panda3d.core import AntialiasAttrib
 import sys
 import time
 
+loadPrcFile("configrc.prc")
+
 # Create an instance of ShowBase, which will open a window and set up a
 # scene graph and camera.
 base = ShowBase()
 
 class Maze(DirectObject):
     def __init__(self):
-        loadPrcFile("configrc.prc")
-
         # Our standard title and instructions text
         self.title = OnscreenText(text="Panda3D: TTR Mega Movers Maze",
                                   parent=base.a2dBottomCenter,
