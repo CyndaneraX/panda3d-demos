@@ -45,6 +45,10 @@ class Street(DirectObject):
         # Fix the camera position
         #base.disableMouse()
 
+        # Loading the music
+        self.musicBGM = loader.loadMusic('phase_5/audio/bgm/ttr_s_ara_cbe_cogdoStreet.ogg')
+        self.musicBGM.setLoop(True)
+
         # Loading the Sound Effects
         self.officeIdleSFX = base.loader.loadSfx('phase_5/audio/sfx/ttr_s_ara_cbe_cogdoSell_idle2.ogg')
         self.officeIdleSFX.setLoop(True)
@@ -80,9 +84,10 @@ class Street(DirectObject):
         self.officeActor.setHpr(20,0,0)
 
         render.setAntialias(AntialiasAttrib.MAuto)
-        taskMgr.doMethodLater(20, self.intro, 'intro')
+        taskMgr.doMethodLater(1, self.intro, 'intro')
     
     def intro(self, task):
+        self.musicBGM.play()
         self.officeActor.setPos(0, 152, -31)
         self.officeActor.play("Entrance")
         taskMgr.doMethodLater(4.5, self.idle, 'idle')
