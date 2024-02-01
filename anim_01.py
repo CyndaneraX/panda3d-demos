@@ -1,7 +1,7 @@
 #!/usr/bin/env python
 
-# Author: Garrett S.(System)
-# Last Updated: 2023-04-06
+# Author: Garrett S.(Milo Charming Magician)
+# Last Updated: 2024-02-01
 # Version: 3.00
 #
 # This Program is the anim01 scened
