@@ -1,7 +1,7 @@
 #!/usr/bin/env python
 
-# Author: Garrett S.(System)
-# Last Updated: 2023-04-07
+# Author: Garrett S.(Milo Charming Magician)
+# Last Updated: 2024-02-01
 # Version: 1.00
 #
 # This Program is the field office on street demo
@@ -85,7 +85,7 @@ class Street(DirectObject):
 
         render.setAntialias(AntialiasAttrib.MAuto)
 
-        taskMgr.doMethodLater(12, self.intro, 'intro')
+        taskMgr.doMethodLater(4, self.intro, 'intro')
 
     def intro(self, task):
         self.musicBGM.play()
