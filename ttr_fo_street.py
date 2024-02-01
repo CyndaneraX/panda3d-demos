@@ -31,13 +31,13 @@ base = ShowBase()
 class Street(DirectObject):
     def __init__(self):
         # Our standard title and instructions text
-        self.title = OnscreenText(text="Panda3D: TTR Field Office",
-                                  parent=base.a2dBottomCenter,
-                                  pos=(0, 0.08), scale=0.08,
-                                  fg=(1, 1, 1, 1), shadow=(0, 0, 0, .5))
-        self.escapeText = OnscreenText(text="ESC: Quit", parent=base.a2dTopLeft,
-                                       fg=(1, 1, 1, 1), pos=(0.06, -0.1),
-                                       align=TextNode.ALeft, scale=.05)
+       # self.title = OnscreenText(text="Panda3D: TTR Field Office",
+        #                          parent=base.a2dBottomCenter,
+        #                          pos=(0, 0.08), scale=0.08,
+        #                          fg=(1, 1, 1, 1), shadow=(0, 0, 0, .5))
+        #self.escapeText = OnscreenText(text="ESC: Quit", parent=base.a2dTopLeft,
+         #3                              fg=(1, 1, 1, 1), pos=(0.06, -0.1),
+         #                              align=TextNode.ALeft, scale=.05)
 
         # Set up the key input
         self.accept('escape', sys.exit)
@@ -84,8 +84,9 @@ class Street(DirectObject):
         self.officeActor.setHpr(20,0,0)
 
         render.setAntialias(AntialiasAttrib.MAuto)
-        taskMgr.doMethodLater(1, self.intro, 'intro')
-    
+
+        taskMgr.doMethodLater(12, self.intro, 'intro')
+
     def intro(self, task):
         self.musicBGM.play()
         self.officeActor.setPos(0, 152, -31)

@@ -1,8 +1,8 @@
 #!/usr/bin/env python
 
-# Author: Garrett S.(System)
-# Last Updated: 2023-04-06
-# Version: 3.00
+# Author: Garrett S.(Milo Charming Magician)
+# Last Updated: 2024-29-01
+# Version: 4.00
 #
 # This Program is the boiler test Scene
 
@@ -31,13 +31,13 @@ base = ShowBase()
 class Boiler(DirectObject):
     def __init__(self):
         # Our standard title and instructions text
-        self.title = OnscreenText(text="Panda3D: TTR Boiler",
-                                  parent=base.a2dBottomCenter,
-                                  pos=(0, 0.08), scale=0.08,
-                                  fg=(1, 1, 1, 1), shadow=(0, 0, 0, .5))
-        self.escapeText = OnscreenText(text="ESC: Quit", parent=base.a2dTopLeft,
-                                       fg=(1, 1, 1, 1), pos=(0.06, -0.1),
-                                       align=TextNode.ALeft, scale=.05)
+        #self.title = OnscreenText(text="Panda3D: TTR Boiler",
+        #                          parent=base.a2dBottomCenter,
+        #                          pos=(0, 0.08), scale=0.08,
+        #                          fg=(1, 1, 1, 1), shadow=(0, 0, 0, .5))
+        #self.escapeText = OnscreenText(text="ESC: Quit", parent=base.a2dTopLeft,
+        #                               fg=(1, 1, 1, 1), pos=(0.06, -0.1),
+        #                               align=TextNode.ALeft, scale=.05)
 
         # Set up the key input
         self.accept('escape', sys.exit)
@@ -95,14 +95,18 @@ class Boiler(DirectObject):
             'OffenseIdle':'phase_5/models/char/ttr_a_chr_cbg_boss_offenseIdle.bam',
             'GoIntoDefense':'phase_5/models/char/ttr_a_chr_cbg_boss_offenseIntoDefense.bam',
             'DefenseIdle':'phase_5/models/char/ttr_a_chr_cbg_boss_defenseIdle.bam',
+            'Lose':'phase_5/models/char/ttr_a_chr_cbg_boss_lose.bam',
             'Dead':'phase_5/models/char/ttr_a_chr_cbg_boss_lose2.bam',
+            'DefenseAttack':'phase_5/models/char/ttr_a_chr_cbg_boss_defenseAttack.bam',
+            'DefenseRetentionPlan':'phase_5/models/char/ttr_a_chr_cbg_boss_defenseRetentionPlan.bam',
+            'Hurt':'phase_5/models/char/ttr_a_chr_cbg_boss_hurt.bam',
         })
         self.boilerActor.reparentTo(render)
         self.boilerActor.setPos(0, 175, -30)
 
         # load cog1 model and animations
         self.cogActor1 = Actor('phase_5/models/char/tt_a_ene_scb_zero.bam', {
-            'Idle':'phase_5/models/char/tt_a_ene_cgb_lured.bam',
+            'Idle':'phase_4/models/char/tt_a_ene_cgb_neutral.bam',
         })
         self.cogActor1.reparentTo(render)
         self.cogActor1.setPos(10, 150, -30)
@@ -110,7 +114,7 @@ class Boiler(DirectObject):
 
         # load cog2 model and animations
         self.cogActor2 = Actor('phase_5/models/char/tt_a_ene_scc_zero.bam', {
-            'Idle':'phase_5/models/char/tt_a_ene_cgc_lured.bam',
+            'Idle':'phase_3.5/models/char/tt_a_ene_cgc_neutral.bam',
         })
         self.cogActor2.reparentTo(render)
         self.cogActor2.setPos(5, 150, -30)
@@ -118,7 +122,7 @@ class Boiler(DirectObject):
 
         # load cog3 model and animations
         self.cogActor3 = Actor('phase_5/models/char/tt_a_ene_scb_zero.bam', {
-            'Idle':'phase_5/models/char/tt_a_ene_cgb_lured.bam',
+            'Idle':'phase_4/models/char/tt_a_ene_cgb_neutral.bam',
         })
         self.cogActor3.reparentTo(render)
         self.cogActor3.setPos(-5, 150, -30)
@@ -126,14 +130,15 @@ class Boiler(DirectObject):
 
         # load cog4 model and animations
         self.cogActor4 = Actor('phase_5/models/char/tt_a_ene_sca_zero.bam', {
-            'Idle':'phase_5/models/char/tt_a_ene_cga_lured.bam',
+            'Idle':'phase_4/models/char/tt_a_ene_cga_neutral.bam',
         })
         self.cogActor4.reparentTo(render)
         self.cogActor4.setPos(-10, 150, -30)
         self.cogActor4.setHpr(180,0,0)
 
         render.setAntialias(AntialiasAttrib.MAuto)
-        taskMgr.doMethodLater(2, self.intro, 'intro')
+
+        taskMgr.doMethodLater(7, self.intro, 'intro')
     
     def intro(self, task):
         self.cogActor1.play('Idle')
@@ -152,7 +157,7 @@ class Boiler(DirectObject):
     def intro2(self, task):
         self.boilerOffenseAttackSFX.play()
         taskMgr.doMethodLater(5.8, self.offenseIdle, 'offenseIdle')
-        taskMgr.doMethodLater(10, self.goIntoDefense, 'goIntoDefense')
+        taskMgr.doMethodLater(12, self.goIntoDefense, 'goIntoDefense')
     
     def offenseIdle(self, task):
         self.boilerActor.play('OffenseIdle')
@@ -169,7 +174,7 @@ class Boiler(DirectObject):
         self.boilerActor.play('DefenseIdle')
         self.boilerActor.loop('DefenseIdle')
         self.boilerDefenseIdleSFX.play()
-        taskMgr.doMethodLater(9.2, self.dead, 'dead')
+        taskMgr.doMethodLater(12, self.dead, 'dead')
     
     def dead(self, task):
         self.boilerDefenseIdleSFX.stop()
