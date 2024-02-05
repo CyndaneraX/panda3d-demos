@@ -26,18 +26,28 @@ class ToonsVsCogsTheUltimate(DirectObject):
         self.musicBGM.setLoop(True)
 
         # Enable per-pixel lighting, etc.
+
+        ambientLight = AmbientLight('ambientLight')
+        ambientLight.setColor((1, 1, 1, 1))
+        ambientLightNP = render.attachNewNode(ambientLight)
+        render.setLight(ambientLightNP)
+
         base.render.setShaderAuto()
+        base.disableMouse()
         render.setAntialias(AntialiasAttrib.MAuto)
 
         interior = loader.loadModel('phase_3.5/models/modules/toon_interior_T.bam')
         interior.reparentTo(render)
+
+        #Camera
+        camera.setPosHpr(15, 4.00, 4.00, 90.00, 0.00, 0.00)
+        #camera.place()
 
         chair = loader.loadModel('phase_3.5/models/modules/chair.bam')
         chair.reparentTo(render)
         chair.setPos(11.00, -1.00, 0.00)
         chair.setHpr(276.29, 0.00, 0.00)
         # chair.place()
-
 
         chair = loader.loadModel('phase_3.5/models/modules/chair.bam')
         chair.reparentTo(render)
@@ -232,7 +242,10 @@ class ToonsVsCogsTheUltimate(DirectObject):
         self.Dog_Exclaim = base.loader.loadSfx("phase_3.5/audio/dial/AV_dog_exclaim.ogg")
         self.Mouse_Medium = base.loader.loadSfx("phase_3.5/audio/dial/AV_mouse_med.ogg")
         self.Mouse_Question = base.loader.loadSfx("phase_3.5/audio/dial/AV_mouse_question.ogg")
+        self.Mouse_Laugh = base.loader.loadSfx("phase_4/audio/sfx/avatar_emotion_laugh.ogg")
         self.Duck_Short = base.loader.loadSfx("phase_3.5/audio/dial/AV_duck_short.ogg")
+        self.DoorOpen = base.loader.loadSfx("phase_3.5/audio/sfx/Door_Open_1.ogg")
+        self.DoorClose = base.loader.loadSfx("phase_3.5/audio/sfx/Door_Close_1.ogg")
 
         self.Lomaton = Actor({'torso':'phase_3/models/char/tt_a_chr_dgl_shorts_torso_1000.bam', \
                      'legs':'phase_3/models/char/tt_a_chr_dgm_shorts_legs_1000.bam'}, \
@@ -658,16 +671,6 @@ class ToonsVsCogsTheUltimate(DirectObject):
         self.ChatBox6.hide()
         self.Mouse.setPlayRate(1.5, 'run')
 
-        taskMgr.doMethodLater(4, self.action, 'action')
-
-    def action(self, task):
-        self.musicBGM.play()
-
-        #Camera
-        camera.setPosHpr(15.00, 4.00, 4.00, 90.00, 0.00, 0.00)
-        movementSequence = Sequence()
-        movementSequence.start()
-
         self.Komoso.loop('sit')
         self.Diwant.loop('sit')
         self.Mellow.loop('sit')
@@ -675,22 +678,46 @@ class ToonsVsCogsTheUltimate(DirectObject):
         self.Whiskers.loop('idle')
         self.Mouse.loop('sit')
 
+        movementSequence = Sequence(Wait(2.0), Wait(1.8),
+                            Wait(0.5), LerpPosInterval(camera, 0, (13, 4, 4)),  # Move backwards over a single second
+                            Parallel(  # Now focus on Mousey
+                            LerpPosInterval(camera, 0, (-10, 0, 4)),  # Start moving forward
+                            Wait(0), LerpHprInterval(camera, 0, (270, 0, 0))),
+                            Wait(12.7), LerpPosInterval(camera, 0, (-10, -10, 4)),
+                            Wait(3.2), LerpHprInterval(camera, 0, (90, 0, 0)), # Mouse running scene
+                            Wait(0), LerpPosInterval(camera, 0, (13, 4, 4)),
+                            Wait(1), LerpHprInterval(camera, 0, (90, 0, 0)),
+                            Wait(1), LerpPosInterval(camera, 0, (-10, 0, 4)),
+                            Wait(0), LerpHprInterval(camera, 0, (270, 0, 0)) 
+                            )
+        movementSequence.start()
+
         mainIval = Sequence(
+            Wait(2.0),
+            Func(base.playMusic, self.musicBGM),
+            Func(self.ChatBox4.hide),
+            Func(self.ChatBox2.hide),
+            Func(self.ChatBox3.hide),
             Func(self.ChatBox.show),
             Func(self.doTalk, self.text, "Class we are going to start this test.", self.Cat_Long),
-            Wait(1.8),
-            Func(self.ChatBox.hide),
             Wait(2.0),
+            Func(self.ChatBox.hide),
+            Wait(1.0),
             Func(self.ChatBox4.show),
             Func(self.doTalk, self.text4, "Okay!", self.Dog_Exclaim),
-            Wait(1.8),
+            Wait(1.0),
             Func(self.ChatBox4.hide),
-            Wait(4.0),
+            Wait(0.5),
             Func(self.ChatBox2.show),
             Func(self.doTalk, self.text2, "I farted.", self.Mouse_Medium),
-            Wait(2.0),
+            Wait(1.0),
+            Func(self.ChatBox2.hide),
+            Wait(1.0),
+            Func(self.ChatBox2.show),
             Func(self.doTalk, self.text2, "GOTTA GO.", self.Mouse_Medium),
             Func(self.Mouse.find('**/muzzle-short-laugh').show),
+            Wait(0.5),
+            Func(base.playSfx, self.Mouse_Laugh),
             Wait(1.0), 
             Func(self.Mouse.find('**/muzzle-short-laugh').hide),
             Wait(1.0),
@@ -706,12 +733,15 @@ class ToonsVsCogsTheUltimate(DirectObject):
             Func(self.ChatBox4.hide),
             Wait(1.8),
             Func(self.ChatBox3.hide),
-            Wait(1.8),
             Func(self.Walking.start),
             Wait(2.5),
+            Func(base.playSfx, self.DoorOpen),
+            Wait(2.0),
+            Func(base.playSfx, self.DoorClose),
+            #Func(base.playSfx, self.YEET),
             Func(self.ChatBox.show),
             Func(self.doTalk, self.text, "Alright then cool I guess.", self.Cat_Long),
-            Wait(2.5),
+            Wait(3.0),
             Func(self.ChatBox.hide),
             Func(self.ChatBox5.show),
             Func(self.doTalk, self.text5, "Ok then????", self.Cat_Long),
@@ -724,7 +754,6 @@ class ToonsVsCogsTheUltimate(DirectObject):
             )
         mainIval.start()
 
-    # Use this to make a toon talk
     def doTalk(self, bubble, text, sound):
         bubble.setText(text)
         sound.play()
