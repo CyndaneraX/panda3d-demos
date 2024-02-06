@@ -93,10 +93,10 @@ class ToonsVsCogsTheUltimate(DirectObject):
                      'legs':'phase_3/models/char/tt_a_chr_dgm_shorts_legs_1000.bam'}, \
                      {'torso':{'sit': 'phase_4/models/char/tt_a_chr_dgl_shorts_torso_sit.bam', \
                      'walk':'phase_3.5/models/char/tt_a_chr_dgl_shorts_torso_walk.bam', \
-                     'run':'phase_3.5/models/char/tt_a_chr_dgl_shorts_torso_leap_z.bam'}, \
+                     'run':'phase_3/models/char/tt_a_chr_dgl_shorts_torso_run.bam'}, \
                      'legs':{'sit':'phase_4/models/char/tt_a_chr_dgm_shorts_legs_sit.bam',
                      'walk':'phase_3.5/models/char/tt_a_chr_dgm_shorts_legs_walk.bam',  \
-                     'run':'phase_3.5/models/char/tt_a_chr_dgm_shorts_legs_leap_z.bam'}})
+                     'run':'phase_3/models/char/tt_a_chr_dgm_shorts_legs_run.bam'}})
 
         self.Mouse.attach('torso', 'legs', 'joint_hips')
 
@@ -226,6 +226,7 @@ class ToonsVsCogsTheUltimate(DirectObject):
         self.Whiskers.find('**/feet').hide()
 
         #Colors
+        #Teacher
         Head.find('**/head-short').setColor(0.23, 0.68, 0.48, 1.0)
         Head.find('**/head-front-short').setColor(0.23, 0.68, 0.48, 1.0)
         Head.find('**/ears-short').setColor(0.23, 0.68, 0.48, 1.0)
@@ -246,6 +247,10 @@ class ToonsVsCogsTheUltimate(DirectObject):
         self.Duck_Short = base.loader.loadSfx("phase_3.5/audio/dial/AV_duck_short.ogg")
         self.DoorOpen = base.loader.loadSfx("phase_3.5/audio/sfx/Door_Open_1.ogg")
         self.DoorClose = base.loader.loadSfx("phase_3.5/audio/sfx/Door_Close_1.ogg")
+        self.FART = base.loader.loadSfx("phase_15/audio/sfx/fart_fx.ogg")
+        self.YEET = base.loader.loadSfx("phase_15/audio/sfx/yeet.ogg")
+        self.AV_RUN = base.loader.loadSfx("phase_3.5/audio/sfx/AV_footstep_runloop.ogg")
+        self.AV_RUN.setLoop(True)
 
         self.Lomaton = Actor({'torso':'phase_3/models/char/tt_a_chr_dgl_shorts_torso_1000.bam', \
                      'legs':'phase_3/models/char/tt_a_chr_dgm_shorts_legs_1000.bam'}, \
@@ -307,6 +312,7 @@ class ToonsVsCogsTheUltimate(DirectObject):
         Hat.setScale(0.35)
 
         #Colors
+        #Dog
         Top_Head.setColor(0.992188, 0.992188, 0.992188, 1.0)
         Bot_Head.setColor(0.992188, 0.992188, 0.992188, 1.0)
         self.Lomaton.find('**/neck').setColor(0.101248, 0.101248, 0.101248, 1.0)
@@ -386,6 +392,7 @@ class ToonsVsCogsTheUltimate(DirectObject):
         self.Mellow.find('**/feet').hide()
 
         #Colors
+        #Cat2
         Head.find('**/head-short').setColor(0.60, 0.60, 0.60, 1.0)
         Head.find('**/head-front-short').setColor(0.60, 0.60, 0.60, 1.0)
         Head.find('**/ears-short').setColor(0.60, 0.60, 0.60, 1.0)
@@ -457,6 +464,7 @@ class ToonsVsCogsTheUltimate(DirectObject):
         self.Diwant.find('**/feet').hide()
 
         #Colors
+        #Duck
         self.Diwant.find('**/neck').setColor(1.00, 1.00, 1.00, 1.0)
         self.Diwant.find('**/arms').setColor(1.00, 1.00, 1.00, 1.0)
         self.Diwant.find('**/legs').setColor(1.00, 1.00, 1.00, 1.0)
@@ -545,12 +553,13 @@ class ToonsVsCogsTheUltimate(DirectObject):
         self.Komoso.find('**/arms').setColor(0.241680, 0.241680, 0.241680, 1.0)
         self.Komoso.find('**/legs').setColor(0.241680, 0.241680, 0.241680, 1.0)
         self.Komoso.find('**/feet').setColor(0.241680, 0.241680, 0.241680, 1.0)
-        self.Komoso.setPosHpr(9.00, -1.00, 1.00, 90.00, 0.00, 0.00)
+        self.Komoso.setPosHpr(9.00, -1.00, 0.00, 90.00, 0.00, 0.00)
         # self.Komoso.place()
 
         self.KomosoEyes = Head.find('**/eyes-short')
 
         # Chat box
+        # Teacher Cat
         self.ChatBox = loader.loadModel('phase_3/models/props/chatbox.bam')
         self.ChatBox.reparentTo(self.Whiskers.find('**/joint_nameTag'))
         self.ChatBox.setScale(0.3)
@@ -569,18 +578,13 @@ class ToonsVsCogsTheUltimate(DirectObject):
         textNodePath.setPos(1, -0.1, 3.0)
 
         # Chat box 2
+        # Mouse
         self.ChatBox2 = loader.loadModel('phase_3/models/props/chatbox.bam')
         self.ChatBox2.reparentTo(self.Mouse.find('**/joint_nameTag'))
         self.ChatBox2.setScale(0.3)
         self.ChatBox2.setPos(0.00, 0.00, 4.70)
         self.ChatBox2.setHpr(0.00, 0.00, 0.00)
         self.ChatBox2.setBillboardPointEye(2)
-
-        self.ChatBox3 = loader.loadModel('phase_3/models/props/chatbox.bam')
-        self.ChatBox3.reparentTo(self.Komoso.find('**/joint_nameTag'))
-        self.ChatBox3.setScale(0.3)
-        self.ChatBox3.setBillboardPointEye(2)
-        self.ChatBox3.setPos(0.00, 0.00, 4.1)
 
         self.text2 = TextNode('random')
         self.text2.setFont(font)
@@ -592,6 +596,13 @@ class ToonsVsCogsTheUltimate(DirectObject):
         textNodePath2.setPos(1.00, -0.10, 2.20)
         # textNodePath2.place()
 
+        # Black Cat
+        self.ChatBox3 = loader.loadModel('phase_3/models/props/chatbox.bam')
+        self.ChatBox3.reparentTo(self.Komoso.find('**/joint_nameTag'))
+        self.ChatBox3.setScale(0.3)
+        self.ChatBox3.setBillboardPointEye(2)
+        self.ChatBox3.setPos(0.00, 0.00, 4.1)
+
         self.text3 = TextNode('random1')
         self.text3.setFont(font)
         self.text3.setTextColor(0, 0, 0, 1)
@@ -599,8 +610,9 @@ class ToonsVsCogsTheUltimate(DirectObject):
         textNodePath3 = aspect2d.attachNewNode(self.text3)
         textNodePath3.setScale(0.8)
         textNodePath3.reparentTo(self.ChatBox3)
-        textNodePath3.setPos(0.00, -6.2, 1.70)
+        textNodePath3.setPos(0.2, -12, 2.1)
 
+        # Dog
         self.ChatBox4 = loader.loadModel('phase_3/models/props/chatbox.bam')
         self.ChatBox4.reparentTo(self.Lomaton.find('**/joint_nameTag'))
         self.ChatBox4.setBillboardPointEye(2)
@@ -615,10 +627,11 @@ class ToonsVsCogsTheUltimate(DirectObject):
         textNodePath4 = aspect2d.attachNewNode(self.text4)
         textNodePath4.setScale(0.8)
         textNodePath4.reparentTo(self.ChatBox4)
-        textNodePath4.setPos(1.40, -4.20, 1.30)
+        textNodePath4.setPos(1.75, -4.20, 1.30)
         textNodePath4.setScale(1.50, 1.50, 1.50)
         # textNodePath4.place()
 
+        # Cat 2
         self.ChatBox5 = loader.loadModel('phase_3/models/props/chatbox.bam')
         self.ChatBox5.reparentTo(self.Lomaton.find('**/joint_nameTag'))
         self.ChatBox5.setBillboardPointEye(2)
@@ -631,17 +644,18 @@ class ToonsVsCogsTheUltimate(DirectObject):
         self.text5.setTextColor(0, 0, 0, 1)
         self.text5.setWordwrap(12)
         textNodePath5 = aspect2d.attachNewNode(self.text5)
-        textNodePath5.setScale(0.8)
+        textNodePath5.setScale(0.3)
         textNodePath5.reparentTo(self.ChatBox5)
-        textNodePath5.setPos(1.40, -4.20, 1.30)
-        textNodePath5.setScale(1.50, 1.50, 1.50)
+        textNodePath5.setPos(1.40, -6.20, 1.30)
+        textNodePath5.setScale(1, 1.30, 1.50)
         # textNodePath5.place()
 
+        # Duck
         self.ChatBox6 = loader.loadModel('phase_3/models/props/chatbox.bam')
         self.ChatBox6.reparentTo(self.Lomaton.find('**/joint_nameTag'))
         self.ChatBox6.setBillboardPointEye(2)
         # self.ChatBox6.place()
-        self.ChatBox6.setPos(-6.9, -1.5, 4.10)
+        self.ChatBox6.setPos(-6.2, 0.5, 5.10)
         self.ChatBox6.setScale(0.30, 0.30, 0.30)
 
         self.text6 = TextNode('random1')
@@ -651,7 +665,7 @@ class ToonsVsCogsTheUltimate(DirectObject):
         textNodePath6 = aspect2d.attachNewNode(self.text6)
         textNodePath6.setScale(0.8)
         textNodePath6.reparentTo(self.ChatBox6)
-        textNodePath6.setPos(1.40, -4.20, 1.30)
+        textNodePath6.setPos(1, -4.20, 1.30)
         textNodePath6.setScale(1.50, 1.50, 1.50)
         # textNodePath6.place()
 
@@ -669,7 +683,7 @@ class ToonsVsCogsTheUltimate(DirectObject):
         self.ChatBox4.hide()
         self.ChatBox5.hide()
         self.ChatBox6.hide()
-        self.Mouse.setPlayRate(1.5, 'run')
+        self.Mouse.setPlayRate(1, 'run')
 
         self.Komoso.loop('sit')
         self.Diwant.loop('sit')
@@ -684,10 +698,10 @@ class ToonsVsCogsTheUltimate(DirectObject):
                             LerpPosInterval(camera, 0, (-10, 0, 4)),  # Start moving forward
                             Wait(0), LerpHprInterval(camera, 0, (270, 0, 0))),
                             Wait(12.7), LerpPosInterval(camera, 0, (-10, -10, 4)),
-                            Wait(3.2), LerpHprInterval(camera, 0, (90, 0, 0)), # Mouse running scene
+                            Wait(3.5), LerpHprInterval(camera, 0, (90, 0, 0)), # Mouse running scene
                             Wait(0), LerpPosInterval(camera, 0, (13, 4, 4)),
                             Wait(1), LerpHprInterval(camera, 0, (90, 0, 0)),
-                            Wait(1), LerpPosInterval(camera, 0, (-10, 0, 4)),
+                            Wait(1.5), LerpPosInterval(camera, 0, (-10, 0, 4)),
                             Wait(0), LerpHprInterval(camera, 0, (270, 0, 0)) 
                             )
         movementSequence.start()
@@ -710,6 +724,7 @@ class ToonsVsCogsTheUltimate(DirectObject):
             Wait(0.5),
             Func(self.ChatBox2.show),
             Func(self.doTalk, self.text2, "I farted.", self.Mouse_Medium),
+            Func(base.playSfx, self.FART),
             Wait(1.0),
             Func(self.ChatBox2.hide),
             Wait(1.0),
@@ -734,11 +749,13 @@ class ToonsVsCogsTheUltimate(DirectObject):
             Wait(1.8),
             Func(self.ChatBox3.hide),
             Func(self.Walking.start),
+            Func(base.playSfx, self.AV_RUN),
+            Wait(2.5),
+            Func(base.playSfx, self.YEET),
             Wait(2.5),
             Func(base.playSfx, self.DoorOpen),
-            Wait(2.0),
+            Wait(1.0),
             Func(base.playSfx, self.DoorClose),
-            #Func(base.playSfx, self.YEET),
             Func(self.ChatBox.show),
             Func(self.doTalk, self.text, "Alright then cool I guess.", self.Cat_Long),
             Wait(3.0),
