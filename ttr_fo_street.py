@@ -57,6 +57,11 @@ class Street(DirectObject):
         self.officeIdleLook4SFX = base.loader.loadSfx('phase_5/audio/sfx/ttr_s_ara_cbe_cogdoSell_idleLook4.ogg')
 
         # Enable per-pixel lighting
+        ambientLight = AmbientLight('ambientLight')
+        ambientLight.setColor((1, 1, 1, 1))
+        ambientLightNP = render.attachNewNode(ambientLight)
+        render.setLight(ambientLightNP)
+        
         base.render.setShaderAuto()
 
         # load skybox

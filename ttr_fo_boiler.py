@@ -61,6 +61,11 @@ class Boiler(DirectObject):
         self.cogDeadSFX = base.loader.loadSfx('phase_3.5/audio/sfx/ENC_cogfall_apart.ogg')
 
         # Enable per-pixel lighting
+        ambientLight = AmbientLight('ambientLight')
+        ambientLight.setColor((1, 1, 1, 1))
+        ambientLightNP = render.attachNewNode(ambientLight)
+        render.setLight(ambientLightNP)
+        
         base.render.setShaderAuto()
 
         # load skybox
