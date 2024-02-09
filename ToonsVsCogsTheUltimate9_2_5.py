@@ -33,7 +33,7 @@ class ToonsVsCogsTheUltimate(DirectObject):
         render.setLight(ambientLightNP)
 
         base.render.setShaderAuto()
-        #base.disableMouse()
+        base.disableMouse()
         render.setAntialias(AntialiasAttrib.MAuto)
 
         interior = loader.loadModel('phase_3.5/models/modules/toon_interior_T.bam')
@@ -41,7 +41,7 @@ class ToonsVsCogsTheUltimate(DirectObject):
 
         #Camera
         camera.setPosHpr(15, 4.00, 4.00, 90.00, 0.00, 0.00)
-        #camera.place()
+        camera.place()
 
         chair = loader.loadModel('phase_3.5/models/modules/chair.bam')
         chair.reparentTo(render)
@@ -160,7 +160,7 @@ class ToonsVsCogsTheUltimate(DirectObject):
         #Glasses.setColor(255, 255, 255)
 
         self.Mouse.setPosHpr(1.30, 1.00, 0.00, 90.00, 0.00, 0.00)
-        self.Mouse.place()
+        # self.Mouse.place()
 
         self.Whiskers = Actor({'torso':'phase_3/models/char/tt_a_chr_dgl_shorts_torso_1000.bam', \
                      'legs':'phase_3/models/char/tt_a_chr_dgm_shorts_legs_1000.bam'}, \
@@ -489,7 +489,7 @@ class ToonsVsCogsTheUltimate(DirectObject):
         self.SadEyes = loader.loadTexture('phase_3/maps/eyesSad.jpg','phase_3/maps/eyesSad_a.rgb')
         self.SadEyes.setMinfilter(Texture.FTLinear)
         self.SadEyes.setMagfilter(Texture.FTLinear)
-        
+
         self.AngerEyes = loader.loadTexture('phase_3/maps/eyesAngry.jpg','phase_3/maps/eyesAngry_a.rgb')
         self.AngerEyes.setMinfilter(Texture.FTLinear)
         self.AngerEyes.setMagfilter(Texture.FTLinear)
@@ -796,10 +796,7 @@ class ToonsVsCogsTheUltimate(DirectObject):
 
     def doTalk(self, bubble, text, sound):
         bubble.setText(text)
-        sound.play()
-        
-# base.oobe()
-        
+        sound.play()  
 
 tvc = ToonsVsCogsTheUltimate()
 base.run()
