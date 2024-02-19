@@ -33,7 +33,7 @@ class ToonsVsCogsTheUltimate(DirectObject):
         render.setLight(ambientLightNP)
 
         base.render.setShaderAuto()
-        base.disableMouse()
+        #base.disableMouse()
         render.setAntialias(AntialiasAttrib.MAuto)
 
         interior = loader.loadModel('phase_3.5/models/modules/toon_interior_T.bam')
@@ -41,7 +41,7 @@ class ToonsVsCogsTheUltimate(DirectObject):
 
         #Camera
         camera.setPosHpr(15, 4.00, 4.00, 90.00, 0.00, 0.00)
-        camera.place()
+        #camera.place()
 
         chair = loader.loadModel('phase_3.5/models/modules/chair.bam')
         chair.reparentTo(render)
